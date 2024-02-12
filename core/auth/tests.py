@@ -30,10 +30,9 @@ class TestAuthenticationViewSet:
             "last_name": "Doe"
         }        
 
-        response = client.post(self.endpoint + "register/", data)
-        
-        assert response.status_code == status.HTTP_201_CREATED
-        
+        response = client.post(self.endpoint + "register/", data)        
+        assert response.status_code == status.HTTP_201_CREATED        
+                    
         
     def test_refresh(self, client, user):
         data = {

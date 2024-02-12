@@ -12,7 +12,7 @@ class RegisterSerializer(UserSerializer):
     
     class Meta:
         model = User
-        fields = ['id', 'bio', 'email', 'username', 'first_name', 'last_name', 'password']
+        fields = ['id', 'bio', 'email', 'username', 'first_name', 'last_name', 'password', 'avatar']
         
     
     # Use the create_user method created before for the user manager to create a new user        
