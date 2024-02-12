@@ -1,0 +1,41 @@
+version: '3.8' # file format we are using. It is related to yaml
+
+services:
+  nginx:
+    container_name: postagram_web
+    restart: always
+    image: nginx:latest # last image available in docker hub
+    volumes: # to persist data generated and used by docker containers
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - uploads_volume:/app/uploads
+    ports:
+      - "80:80"
+    depends_on: # wait for some services to start. In this case Django API
+      - api
+
+  api:
+    container_name: postagram_api
+    build: . # where to look in the Dockerfile. In this case, in the current directory
+    restart: always
+    env_file: .env      
+    ports:
+      - "8000:8000"        
+    command: sh -c "python3 manage.py migrate --no-input && gunicorn CoreRootProject.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - .:/app
+      - uploads_volume:/app/uploads
+    depends_on:
+      - db
+
+  db:
+    container_name: postagram_db      
+    image: postgres:14.3-alpine
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+
+volumes:
+  uploads_volume:
+  postgres_data:
+

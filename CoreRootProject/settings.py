@@ -1,5 +1,17 @@
 # Imports
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+
+# Loading dot env
+load_dotenv()
+
+
+
+# Setting the env
+ENV = os.environ.get("ENV")
 
 
 
@@ -9,13 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2&kdf_4*m^i69pxx*7&idfewc$8&%79m9lm(ha7&7k=09mybmv'
+#SECRET_KEY = 'django-insecure-2&kdf_4*m^i69pxx*7&idfewc$8&%79m9lm(ha7&7k=09mybmv'
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", default='django-insecure-2&kdf_4*m^i69pxx*7&idfewc$8&%79m9lm(ha7&7k=09mybmv'
+)
 
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False if ENV == "PROD" else True
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="*").split(",")
 
 
 
@@ -91,7 +107,7 @@ WSGI_APPLICATION = 'CoreRootProject.wsgi.application'
 
 
 # Database
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'coredb_2',
@@ -99,6 +115,17 @@ DATABASES = {
         'PASSWORD': 'wCh29&HE&T83',
         'HOST': 'localhost',
         'PORT': '5432',        
+    }
+} """
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv("DATABASE_NAME", "coredb"),
+        'USER': os.getenv("DATABASE_USER", "core"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD", "wCh29&HE&T83"),
+        'HOST': os.environ.get("DATABASE_HOST", "localhost"),
+        'PORT': os.getenv("DATABASE_PORT", "5432"),
     }
 }
 
