@@ -30,6 +30,6 @@ jobs:
                   key: ${{secrets.SSH_PRIVATE_KEY}}
                   passphrase: ${{secrets.SSH_PASSPHRASE}}
                   script: |
-                      cd ~/home/ubuntu
-                      ./docker-ec2-deploy.sh
+                      cd ~/.scripts
+                      ./home/ubuntu/docker-ec2-deploy.sh
     
