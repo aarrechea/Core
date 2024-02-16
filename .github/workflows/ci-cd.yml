@@ -31,5 +31,5 @@ jobs:
                   passphrase: ${{secrets.SSH_PASSPHRASE}}
                   script: |
                     cd ~/.ssh
-                    ~/docker-ec2-deploy.sh
+                    ~/ubuntu/docker-ec2-deploy.sh
     
