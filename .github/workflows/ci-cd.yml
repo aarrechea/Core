@@ -13,8 +13,8 @@ jobs:
               run: echo "${{ secrets.TEST_SECRETS }}" >> .env
             - name: Building containers
               run: docker-compose up -d --build
-            #- name: Running tests
-            #  run: docker-compose exec -T api pytest            
+            - name: Running tests
+              run: docker-compose exec -T api pytest
 
     deploy:
         name: Deploying on EC2 via SSH
