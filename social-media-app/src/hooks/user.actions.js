@@ -8,7 +8,9 @@ import axiosService from "../helpers/axios";
 /* User actions */
 function useUserActions() {
     const navigate = useNavigate();
-    const baseURL = "http://localhost:8000/api";
+    const baseURL = process.env.REACT_APP_API_URL;
+    //const baseURL = "http://localhost:8000/api";
+
     
 
     return {

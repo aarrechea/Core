@@ -8,7 +8,8 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 
 /* Content-Type header for the POST request constant */
 const axiosService = axios.create({
-    baseURL: "http://localhost:8000/api", 
+    baseURL: process.env.REACT_APP_API_URL, 
+    //baseURL: "http://localhost:8000/api", 
     headers: {
         "Content-Type": "application/json",        
     },
